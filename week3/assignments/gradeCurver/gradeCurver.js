@@ -1,4 +1,4 @@
-// declare each of the variables marked with "**" in the appropriate scope and using the appropriate type
+// declare each of the variables marked with "**" in the appropriate scope and using the appropriate type(done?)
 
 // create an event listener that calls the curveGrade() function when the Curve It!! button is clicked
 
@@ -36,29 +36,21 @@ function convertArray(obj) {
 // the functions to arrow functions. You can also condense the number of lines by combining some 
 // separate lines of code into single lines. It currently has 18 lines of code. Without counting  
 // empty lines, can you get the number of lines down to 8?
-
+// did lines 35-38 not sure if correct.
 function curveGrades() {
-    **sum = function (accumulator, currentValue) {
-        return accumulator + currentValue
-    }
+    var sum = accumulator; currentValue => accumulator + currentValue
 
-    **sumGrades = function(array) {
-        return array.reduce(sum)
-    }
+    var sumGrades = array => array.reduce(sum)
 
-    **aryGrades = convertArray(document.querySelector('#scores'))
+    var aryGrades = convertArray(document.querySelector('#scores'))
 
-    **minGrade = aryGrades.reduce(function(a, b) {
-        return Math.min(a, b)
-    })
+    var minGrade = aryGrades.reduce (a, b) => Math.min(a, b)
     
-    **maxGrade = aryGrades.reduce(function(a, b) {
-        return Math.max(a, b)
-    })
+    var maxGrade = aryGrades.reduce(a, b) => Math.max(a, b)
     
-    **mean = sumGrades(aryGrades) / aryGrades.length
+    var mean = sumGrades(aryGrades) / aryGrades.length
 
-    **range = maxGrade - minGrade
+    var range = maxGrade - minGrade
 
     gradeSlice = range / 5
 

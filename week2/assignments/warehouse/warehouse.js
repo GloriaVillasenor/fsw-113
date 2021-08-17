@@ -74,7 +74,7 @@ function hazardous () {
         if (parts[i].aisle === "J4"){
             console.log(parts[i])
             let partInfo = document.createElement("p")
-            partInfo.textContent = ("Get Gloves")
+            partInfo.textContent = (parts[i].partDescr + " Get Gloves")
 
             hazard.appendChild(partInfo)
             hazardMat = false
@@ -96,7 +96,7 @@ function smallParts () {
         if (parts[i].aisle === "H1") {
             console.log(parts[i])
             let partInfo = document.createElement("p")
-            partInfo.textContent = ("take basket and go dirctly to aisle H1")
+            partInfo.textContent = (parts[i].partDescr + " take basket and go dirctly to aisle H1")
 
             smallItems.appendChild(partInfo)
             smalls = false
@@ -113,18 +113,24 @@ function largeParts () {
     var largeItems = document.getElementById("forkiftNeeded")
     var large = true
     for (i = 0; i < parts.length; i++) {
-        if (parts[i].aisle === "S", "T", "U") {
+        if (parts[i].aisle === "S"| "T"| "U") {
             console.log(parts[i])
             let partInfo = document.createElement("p")
-            partInfo.textContent = ("need to reserve a forklift")
+            partInfo.textContent = (parts[i] + "need to reserve a forklift")
 
             largeItems.appendChild(partInfo)
             large = false
         }
     }
-    if (large) {
-        largeItems.remove()
-    }
 }
 largeParts ()
 // sum up the total number of parts and append that number to the text already in "totalItems" element
+function total(){
+    var totalItem = document.getElementById("totalItems")
+    let sum = 0
+    for (i = 0; i < parts.length; i++) {
+    sum += parts[i].qty
+    }
+    totalItem.textContent += sum
+}
+total()

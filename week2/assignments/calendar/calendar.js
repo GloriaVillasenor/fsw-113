@@ -8,7 +8,6 @@ document.getElementById("printCalendar").addEventListener(
     "click", function() {printCalendar()}
 )
 
-
 function printCalendar(){
     document.getElementById("calendarDays").innerHTML = ""
     const monthNumber = document.getElementById("month").value
