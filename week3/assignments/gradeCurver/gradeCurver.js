@@ -3,7 +3,15 @@
 // create an event listener that calls the curveGrade() function when the Curve It!! button is clicked
 
 // create an event listener that resets the scores and grades to their defaults when the Reset button is clicked
+let aryGrades, gradeSlice, mean, range
 
+document.querySelector("#submit").addEventListener("click", function(){
+    curveGrades()
+})
+document.querySelector("#reset").addEventListener("click", function(){
+    document.querySelector("#scores").value = ""
+    document.querySelector("#grades").innerText = ""
+})
 function applyBell(grade, index, ary) {
     switch (true) {
         case grade >= (mean + (gradeSlice * 2)): 
@@ -32,29 +40,23 @@ function convertArray(obj) {
     return ary
 }
 
-// Condense the number of lines within the curveGrade() function as much as possible by converting 
-// the functions to arrow functions. You can also condense the number of lines by combining some 
-// separate lines of code into single lines. It currently has 18 lines of code. Without counting  
-// empty lines, can you get the number of lines down to 8?
-// did lines 35-38 not sure if correct.
+// Condense the number of lines within the curveGrade() function as much as possible by converting the functions to arrow functions. You can also condense the number of lines by combining some separate lines of code into single lines. It currently has 18 lines of code. Without counting empty lines, can you get the number of lines down to 8? (done?)
 function curveGrades() {
-    var sum = accumulator; currentValue => accumulator + currentValue
+    sumGrades = (array) => array.reduce((accumulator, currentValue) => accumulator + currentValue)
 
-    var sumGrades = array => array.reduce(sum)
+    aryGrades = convertArray(document.querySelector('#scores'))
 
-    var aryGrades = convertArray(document.querySelector('#scores'))
-
-    var minGrade = aryGrades.reduce (a, b) => Math.min(a, b)
+    minGrade = aryGrades.reduce ((a, b) => Math.min(a, b))
     
-    var maxGrade = aryGrades.reduce(a, b) => Math.max(a, b)
+    maxGrade = aryGrades.reduce((a, b) => Math.max(a, b))
     
-    var mean = sumGrades(aryGrades) / aryGrades.length
+    mean = sumGrades(aryGrades) / aryGrades.length
 
-    var range = maxGrade - minGrade
+    range = maxGrade - minGrade
 
     gradeSlice = range / 5
 
     aryGrades.forEach(applyBell)
-
     // write the value of aryGrades to the grades div in the HTML document
+    document.querySelector("#grades").innerText = aryGrades
 }
