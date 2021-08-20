@@ -1,13 +1,18 @@
-// declare any necessary variables
+var type
 
-// define a function called 'fetchData()' that passes the values from 
-// the 'queryType' and 'itemID' elements in starwars.html to the function 
-// called 'getFromSWAPI()'
+function fetchData() {
+    var queryType = document.getElementById("queryType").value
+    var itemID = document.getElementById("itemID").value
+    // console.log("queryType: ", queryType)
+    // console.log("itemId: ", itemId)
+    getFromSWAPI(queryType, itemID)
+}
 
-function getFromSWAPI() {
-    // assign values to any necessary variables
+function getFromSWAPI(queryType, itemID) {
+    type = queryType
     fetch(`https://swapi.dev/api/${queryType}/${itemID}`)
     .then(function (response) {
+        //console.log('response: ', data)
         return response.json()
     })
     .then(function(data){
@@ -18,8 +23,37 @@ function getFromSWAPI() {
     })
 }
 
-// create a new function called 'updateInfo()' that receives the data from 
-// the call to that function (see above). Use logic to write the appropriate
-//labels to 'dataLabel1' and 'dataLabel2' elements in starwars.html, as well
-// as the appropriate values from the data object to the 'dataValue1' and 
-// 'dataValue2' elements in starwars.html.
+function updateInfo(data) {
+
+    console.log('data: ', data)
+    console.log('type: ', type)
+
+    var dataLabel1 = document.getElementById("dataLabel1")
+    var dataValue1 = document.getElementById("dataValue1")
+    var dataLabel2 = document.getElementById("dataLabel2")
+    var dataValue2 = document.getElementById("dataValue2")
+
+    if (type === 'people') {
+        dataLabel1.innerText = 'Person Name:'
+        dataValue1.innerText = data.name
+        dataLabel2.innerText = 'Height:'
+        dataValue2.innerText = data.height
+    } else if (type === 'planets') {
+        dataLabel1.innerText = 'Planet Name:'
+        dataValue1.innerText = data.name
+        dataLabel2.innerText = 'Diameter:'
+        dataValue2.innerText = data.diameter
+
+    } else if (type === 'starships') {
+        dataLabel1.innerText = 'Starship Name:'
+        dataValue1.innerText = data.name
+        dataLabel2.innerText = 'Model:'
+        dataValue2.innerText = data.model
+
+    }
+
+
+
+
+    
+}
