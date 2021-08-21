@@ -22,11 +22,10 @@ const parts = [
 
 ]
 
-// list of each part number and qty for check-off in the "detailsList" element
 function list () {
     var details = document.getElementById("detailsList")
 
-    for (i = 0; i < parts.length; i++) {
+    parts.forEach(function (each) {
         
         let partNo = document.createElement('div')
         details.appendChild(partNo)
@@ -36,101 +35,100 @@ function list () {
         partNo.appendChild(check)
 
         let partInfo = document.createElement("span")
-        partInfo.textContent = ("parts: " + "" + parts[i].partNbr + "" + "Quantity: " + "" + parts[i].qty)
+        partInfo.textContent = ("parts: " + " " + each.partNbr + " " + "Qty: " + " " + each.qty)
 
         partNo.appendChild(partInfo)
         
-    }
+    }) 
 } 
 
 list()
 
-// if parts requiring special handling exist (in aisle B3), list of items needing 
-// special packaging in the "specialPackaging" element, else remove element
     function special () {
-        var specialPkg = document.getElementById("specialPackaging")
-        var emptyPkg = true
-        for (i = 0; i < parts.length; i++) {
-            if (parts[i].aisle === "B3"){
-                console.log(parts[i])
-                let partInfo = document.createElement("span")
-                partInfo.innerHTML = ("<br></br>parts: " + "" + parts[i].partNbr + "/" + "Quantity: " + "" + parts[i].qty)
+    var specialPkg = document.getElementById("specialPackaging")
+    var emptyPkg = true
+    parts.filter(function (specialPackaging) {
+        if (specialPackaging.aisle === "B3"){
+            let partInfo = document.createElement("span")
+            partInfo.innerHTML = ("<br></br>Item: " + " " + specialPackaging.partNbr + "/" + "Qty: " + " " + specialPackaging.qty)
         
-                specialPkg.appendChild(partInfo)
-                emptyPkg = false
+            specialPkg.appendChild(partInfo)
+            emptyPkg = false
             }
-        }
+        }) 
         if (emptyPkg) {
             specialPkg.remove()
         }
     }
     special()
-// if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
-// element and remind them to get gloves, else remove element
+
 function hazardous () {
     var hazard = document.getElementById("hazardousMaterials")
     var hazardMat = true
-    for (i = 0; i < parts.length; i++) {
-        if (parts[i].aisle === "J4"){
-            console.log(parts[i])
+    parts.find(function (hazardousMaterials) {
+        if (hazardousMaterials.aisle === "J4"){
             let partInfo = document.createElement("p")
-            partInfo.textContent = (parts[i].partDescr + " Get Gloves")
+            partInfo.textContent = (" Get Gloves")
 
             hazard.appendChild(partInfo)
             hazardMat = false
 
         }
-    }
+    }) 
     if (hazardMat) {
         hazard.remove()
     }
 }
 hazardous()
 
-// if all items in the order are small parts (aisle H1), then let employee know that they should take 
-// a basket and go dirctly to aisle H1
 function smallParts () {
     var smallItems = document.getElementById('smallItemsOnly')
     var smalls = true
-    for (i = 0; i < parts.length; i++) {
-        if (parts[i].aisle === "H1") {
-            console.log(parts[i])
+    parts.every(function(smallItemsOnly) {
+        if (smallItemsOnly.aisle === "H1") {
             let partInfo = document.createElement("p")
-            partInfo.textContent = (parts[i].partDescr + " take basket and go dirctly to aisle H1")
+            partInfo.textContent = (smallItemsOnly.partDescr + " take basket and go dirctly to aisle H1")
 
             smallItems.appendChild(partInfo)
             smalls = false
         }
-    }
+    }) 
     if (smalls) {
         smallItems.remove()
     }
 }
 smallParts()
-// if there are large items (anthing in aisles S, T, or U), then let the employee know in the "forkiftNeeded"
-// element that they will need to reserve a forklift, else remove the element
+
 function largeParts () {
     var largeItems = document.getElementById("forkiftNeeded")
     var large = true
-    for (i = 0; i < parts.length; i++) {
-        if (parts[i].aisle === "S"| "T"| "U") {
-            console.log(parts[i])
+    parts.some(function(forkiftNeeded) {
+        if (forkiftNeeded.aisle === "S"| "T"| "U") {
             let partInfo = document.createElement("p")
-            partInfo.textContent = (parts[i] + "need to reserve a forklift")
+            partInfo.textContent = (forkiftNeeded + "need to reserve a forklift")
 
             largeItems.appendChild(partInfo)
             large = false
         }
+    }) 
+    if (large) {
+        largeItems.remove()
     }
 }
 largeParts ()
-// sum up the total number of parts and append that number to the text already in "totalItems" element
+
 function total(){
     var totalItem = document.getElementById("totalItems")
-    let sum = 0
-    for (i = 0; i < parts.length; i++) {
-    sum += parts[i].qty
-    }
+    let sum = parts.reduce(function(totalItems, currentItems) {
+        return totalItems += currentItems.qty
+        }, 0) 
     totalItem.textContent += sum
 }
 total()
+// parts.reduce(function(Total, item) {
+//     return item.qty + Total
+// }, 
+// 0)
+// I can't get this  to work properly and this is the only way the tutors 
+// keep telling me to do it. I asked about writing it with out the 
+// function and she said it doesn't matter
