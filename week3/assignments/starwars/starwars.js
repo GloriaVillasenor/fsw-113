@@ -50,10 +50,5 @@ function updateInfo(data) {
         dataLabel2.innerText = 'Model:'
         dataValue2.innerText = data.model
 
-    }
-
-
-
-
-    
+    }  
 }
