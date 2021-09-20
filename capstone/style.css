@@ -1,5 +1,61 @@
-/* 
-    Create all the style definitions necessary to make your app look as close 
-    to the example as possible. You will need to use display:grid to make the 
-    bug reports display in three columns (see week 4).
-*/
+* {
+    background-image: url('./images/wallpaper.jpg');
+    height: auto;
+    width: auto;
+}
+.reportWrapper {
+    border-color:white;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 25px;
+    padding: 20px;
+    box-sizing: unset;
+    margin-left: 500px;
+    margin-right: 500px;
+}
+
+#topbar {
+    border-width: 3px;
+    border-style: solid;
+    color: red;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#reportedBy {
+    color: grey;
+    border-width: 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#system {
+    color: grey;
+    border-width: 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#subSystem {
+    color: grey;
+    border-width: 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+
+}
+
+#bugDesc {
+    color: grey;
+    border-width: 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#resetBtn {
+    color: indianred;
+}
+
+#submitBtn {
+    color: indianred;
+
+}
